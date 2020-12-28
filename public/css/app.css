@@ -2704,9 +2704,9 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
+  color: black;
   background-color: #3490dc;
-  border-color: #3490dc;
+  border-color: darkblue;
 }
 
 .btn-neg{

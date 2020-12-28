@@ -20,7 +20,7 @@
                     <div>
                         <div class="font-weight-bold">
                             <a href="/profile/{{$post->user->id}}">
-                                
+
                                 <span class="text-dark"> {{$post->user->username}}</span>
                             </a>
                         </div>
@@ -31,31 +31,31 @@
             <hr>
 
             <h4>Price: ${{$post->price}}</h1>
-            <p><span class="font-weight-bold">
+                <p><span class="font-weight-bold">
 
-                <a href="/profile/{{$post->user->id}}">
-                
-                </a>
-                <h4> Items: </h4>
-                </span>  {{$post->caption}}
-                <div>
+                        <a href="/profile/{{$post->user->id}}">
+
+                        </a>
+                        <h4> Items: </h4>
+                    </span> {{$post->caption}}
+                    <div>
                 </p>
                 <?php
-                    //Check to make sure user isn't the owner of the post, or an admin
-                    if (($post->user_id != Auth::user()->id) && (Auth::user()->user_type != 'Admin')){
+                //Check to make sure user isn't the owner of the post, or an admin
+                if (($post->user_id != Auth::user()->id) && (Auth::user()->user_type != 'Admin')) {
                 ?>
-                <a class="btn btn-pos" href="/r/{{ $post->id}}">Request</a>
-                    <?php 
-                //if they are the owner of the post, or an admin, they are able to delete the post.
-                } else{?>
-                        <a class="btn btn-neg" href="/p/delete/{{$post->id}}">Delete </a>
-                        
-                    <?php } ?>
+                    <a class="btn btn-pos" href="/r/{{ $post->id}}">Request</a>
+                <?php
+                    //if they are the owner of the post, or an admin, they are able to delete the post.
+                } else { ?>
+                    <a class="btn btn-neg" href="/p/delete/{{$post->id}}">Delete </a>
 
-                
-                </div>
-            </p>
+                <?php } ?>
+
+
         </div>
+        </p>
     </div>
+</div>
 </div>
 @endsection

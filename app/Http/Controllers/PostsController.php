@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Author: Dan Hallam - B00750229
  * Class: PostsController
  * Description: controller to handle logic for Displaying posts, Creating Posts, and uploading posts to the database
  */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -21,7 +23,7 @@ class PostsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Function: index()
      * Description: Stores all posts in the database, and compacts them with the returned view to be accessed.
@@ -29,20 +31,15 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-        if(Auth::user()->user_type == 'Admin')
-        {
-            return view('posts.index',compact('posts'));
-        }
-        else{
+        if (Auth::user()->user_type == 'Admin') {
+            return view('posts.index', compact('posts'));
+        } else {
             $city = Auth::user()->city;
-            $posts = $posts->where('city',$city);
-            $posts = $posts->sortByDesc('created_at');    
-        
+            $posts = $posts->where('city', $city);
+            $posts = $posts->sortByDesc('created_at');
+
             return view('posts.index', compact('posts'));
         }
-        
-        
-        
     }
     /**
      * Function: create()
@@ -62,12 +59,12 @@ class PostsController extends Controller
         $data = request()->validate([
             'caption' => 'required',
             'price' => 'required',
-            'image' => ['required','image'],
+            'image' => ['required', 'image','mimes:jpeg,png,jpg,gif,svg', 'max:500000'],
         ]);
 
         $imagePath = request('image')->store('uploads', 'public');
 
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
         $image->save();
         $city = Auth::user()->city;
 
@@ -79,16 +76,14 @@ class PostsController extends Controller
         ]);
 
         //user is redirected to their profile
-        return redirect('/profile/'. auth()->user()->id);
-
+        return redirect('/profile/' . auth()->user()->id);
     }
 
     public function delete(\App\Models\Post $post)
     {
         $id = $post->id;
         DB::table('posts')->where('id', $id)->delete();
-        return redirect('/profile/'. auth()->user()->id);
-       
+        return redirect('/profile/' . auth()->user()->id);
     }
     /**
      * Function: show()
@@ -99,16 +94,16 @@ class PostsController extends Controller
         return view('posts.show', compact('post'));
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
 
         $word = $request['search'];
 
-        $posts = DB::table('posts')->where('caption','LIKE', '%'.$word.'%')->get();    
-        $posts = $posts->sortByDesc('created_at'); 
-        
-        $users = DB::table('users')->where('name','LIKE','%'.$word.'%')->orWhere('username','LIKE','%'.$word.'%')->get();
-        
-        return view('posts.search', ['posts'=>$posts, 'users'=>$users]);
-    }
+        $posts = DB::table('posts')->where('caption', 'LIKE', '%' . $word . '%')->get();
+        $posts = $posts->sortByDesc('created_at');
 
+        $users = DB::table('users')->where('name', 'LIKE', '%' . $word . '%')->orWhere('username', 'LIKE', '%' . $word . '%')->get();
+
+        return view('posts.search', ['posts' => $posts, 'users' => $users]);
+    }
 }

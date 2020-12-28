@@ -29,7 +29,7 @@
                 
             ?>
             <a href="/p/{{$post_id}}">
-                    <img src="/storage/{{$post_image}}" style="width:50%">
+                    <img alt="$post->caption" src="/storage/{{$post_image}}" style="width:50%">
             </a>
         </div>
     <hr>

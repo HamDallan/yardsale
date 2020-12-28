@@ -51,7 +51,7 @@
             {{$post->price}} $
                 <a href="/p/{{ $post->id }}">
                     
-                    <img src= "/storage/{{ $post->image }}"class="w-100">
+                    <img alt="$post->caption"src= "/storage/{{ $post->image }}"class="w-100">
                 </a>
             </div>
 
