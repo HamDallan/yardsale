@@ -32,17 +32,23 @@
 
             <h4>Price: ${{$post->price}}</h1>
             <p><span class="font-weight-bold">
+
                 <a href="/profile/{{$post->user->id}}">
-  
-                </a></span>  {{$post->caption}}
+                
+                </a>
+                <h4> Items: </h4>
+                </span>  {{$post->caption}}
                 <div>
+                </p>
                 <?php
-                    if ($post->user_id != Auth::user()->id){
+                    //Check to make sure user isn't the owner of the post, or an admin
+                    if (($post->user_id != Auth::user()->id) && (Auth::user()->user_type != 'Admin')){
                 ?>
-                <a class="button" href="/r/{{ $post->id}}">Request</a>
-                    <?php } else{?>
-                        <a class="button" href="/p/delete/{{$post->id}}">Delete </a>
-                    
+                <a class="btn btn-pos" href="/r/{{ $post->id}}">Request</a>
+                    <?php 
+                //if they are the owner of the post, or an admin, they are able to delete the post.
+                } else{?>
+                        <a class="btn btn-neg" href="/p/delete/{{$post->id}}">Delete </a>
                         
                     <?php } ?>
 

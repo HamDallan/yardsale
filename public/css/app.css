@@ -1148,11 +1148,48 @@ pre code {
     flex: 0 0 50%;
     max-width: 50%;
   }
+  .button {
+
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+  }
+  .button-neg {
+    text-decoration: none;
+    background-color: lightsalmon;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+  }
+
+  .button-pos {
+    text-decoration: none;
+    background-color: lightgreen;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+  }
 
   .row-cols-md-3 > * {
     flex: 0 0 33.3333333333%;
     max-width: 33.3333333333%;
   }
+
+  .button-warning {
+    background: rgb(223, 117, 20);
+    /* this is an orange */
+}
 
   .row-cols-md-4 > * {
     flex: 0 0 25%;
@@ -2670,6 +2707,18 @@ fieldset:disabled a.btn {
   color: #fff;
   background-color: #3490dc;
   border-color: #3490dc;
+}
+
+.btn-neg{
+  color: black;
+  background-color: lightsalmon;
+  border-color: darkred;
+}
+
+.btn-pos {
+  color: black;
+  background-color: lightgreen;
+  border-color: green;
 }
 
 .btn-primary:hover {

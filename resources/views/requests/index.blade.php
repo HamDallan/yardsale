@@ -32,13 +32,19 @@
                     <img src="/storage/{{$post_image}}" style="width:50%">
             </a>
         </div>
-        <a class="button" href="/requests/delete/{{$requests->id}}">Delete </a>
-        <a class="button" href="/requests/approve/{{$requests->id}}">Approve </a>
+    <hr>
+        <div class="col-6">
+        <a class="btn btn-neg" href="/requests/delete/{{$requests->id}}">Delete </a>
+        <a class="btn btn-pos" href="/requests/approve/{{$requests->id}}">Approve </a>
+        </div>
         <div class="row pt-2 pb-4">
+        
             <div class="col-6">
                 <p><span class="font-weight-bold">
-  
-                        <span class="text-dark">Sent By {{$requests->buyer}}</span>
+                        <div>
+                            <span class="text-dark">Sent By {{$requests->buyer}}</span>
+                        </div>
+                        <span class="text-dark">Address: {{$requests->address}}</span>
   
                 </p>
             </div>

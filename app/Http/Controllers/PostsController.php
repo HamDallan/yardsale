@@ -11,6 +11,7 @@ use Intervention\Image\Facades\Image;
 use App\Models\User;
 use App\Models\Post;
 use DB;
+use Auth;
 
 class PostsController extends Controller
 {
@@ -28,9 +29,20 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-        $posts = $posts->sortByDesc('created_at');    
-
-        return view('posts.index', compact('posts'));
+        if(Auth::user()->user_type == 'Admin')
+        {
+            return view('posts.index',compact('posts'));
+        }
+        else{
+            $city = Auth::user()->city;
+            $posts = $posts->where('city',$city);
+            $posts = $posts->sortByDesc('created_at');    
+        
+            return view('posts.index', compact('posts'));
+        }
+        
+        
+        
     }
     /**
      * Function: create()
@@ -57,11 +69,13 @@ class PostsController extends Controller
 
         $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
         $image->save();
+        $city = Auth::user()->city;
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
             'image' => $imagePath,
             'price' => $data['price'],
+            'city' => $city,
         ]);
 
         //user is redirected to their profile
@@ -83,6 +97,18 @@ class PostsController extends Controller
     public function show(\App\Models\Post $post)
     {
         return view('posts.show', compact('post'));
+    }
+
+    public function search(Request $request){
+
+        $word = $request['search'];
+
+        $posts = DB::table('posts')->where('caption','LIKE', '%'.$word.'%')->get();    
+        $posts = $posts->sortByDesc('created_at'); 
+        
+        $users = DB::table('users')->where('name','LIKE','%'.$word.'%')->orWhere('username','LIKE','%'.$word.'%')->get();
+        
+        return view('posts.search', ['posts'=>$posts, 'users'=>$users]);
     }
 
 }

@@ -9,7 +9,7 @@
 
 <div class="container">
 <div class="col-6 offset-3" style="color:black;text-align:center">
-<h1>New Tables</h1>
+<h1><b>New Tables</b></h1>
 <hr>
 </div>
     @foreach ($posts ?? '' as $post)
@@ -18,7 +18,7 @@
             
             <h2 style="color:black;text-align:center">${{$post->price}} Table </h2>
                 <a href="/p/{{$post->id }}">
-                    <img src="/storage/{{$post->image}}" class="w-100">
+                    <img src="/storage/{{$post->image}}" class="w-100" alt="{{$post->caption}}">
                 </a>
             </div>
         </div>

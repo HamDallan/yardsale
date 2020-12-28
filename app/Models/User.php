@@ -26,6 +26,8 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
+        'city',
+        'user_type',
         'address_address',
         'address_latitude',
         'address_longitude',
