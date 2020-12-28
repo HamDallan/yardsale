@@ -44,6 +44,8 @@ class PostsController extends Controller
     /**
      * Function: create()
      * Description: returns the create post view
+     * Accepts: nothing
+     * Returns: create post view
      */
     public function create()
     {
@@ -53,6 +55,8 @@ class PostsController extends Controller
     /**
      * Function: store()
      * Description: validates inputed data from the create post view, and stores it into the database,
+     * Accepts: data from create post form
+     * Returns: uploads data to database and redirects to the user's profile
      */
     public function store()
     {
@@ -88,12 +92,20 @@ class PostsController extends Controller
     /**
      * Function: show()
      * Description: takes a specific post and compacts it with a returned view
+     * Accepts: a post object
+     * Returns: show post view with the post object compacted
      */
     public function show(\App\Models\Post $post)
     {
         return view('posts.show', compact('post'));
     }
 
+    /**
+     * Function: search()
+     * Description: takes in a string and returns the search results
+     * Accepts: a string
+     * Returns: the Search view with search results
+     */
     public function search(Request $request)
     {
 
